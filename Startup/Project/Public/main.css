@@ -1,0 +1,58 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 375px;
+  }
+
+header {
+    display: flex;
+    flex: 1 80px;
+    flex-direction: row;
+    align-items: center;
+    background-color: cadetblue;
+
+  }
+
+menu {
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+
+}
+
+main {
+  display: flex;
+  font-style:inherit;
+  flex: 1 calc(100vh - 110px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: azure;
+  padding: 1em;
+  margin-bottom: 0.5em
+}
+
+nav .navbar-nav{
+    align-items: end;
+  }
+  
+  nav .nav-link {
+    padding: 0 0.5em;
+    align-items: right;
+  }
+
+contact{
+  justify-content: centerMike;
+}
+
+#RYW{
+  justify-content: center;
+}
+
+footer {
+  flex: 1 50px;
+  background-color: darkslategray;
+  color:aliceblue;
+}

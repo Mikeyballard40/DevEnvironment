@@ -1,0 +1,68 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+}
+
+header {
+  display: flex;
+  flex: 1 80px;
+  flex-direction: row;
+  align-items: center;
+  background-color: cadetblue;
+
+}
+
+menu {
+flex: 1;
+display: flex;
+/*  overwrite Bootstrap so the menu does not wrap */
+flex-direction: row !important;
+
+}
+
+.Section{
+flex: 1 calc(40em - 10px);
+}
+
+record{
+  display: flex;  
+  flex: 1;
+  flex-direction: column;
+  padding: 1em;
+
+}
+
+
+main {
+display: flex;
+flex: 1;
+font-style:inherit;
+/* flex: 1 calc(10vh - 100px); */
+display: flex;
+flex-direction: column;
+
+
+justify-content: center;
+background-color: azure;
+}
+
+.day:hover{
+  border: solid black;
+}
+
+nav .nav-link {
+  padding: 0 0.5em;
+}
+
+.user{
+flex: 1;
+width: 100%;
+padding: 0.5em;
+}
+
+footer {
+flex: 1 50px;
+background-color: darkslategray;
+color:aliceblue;
+}
