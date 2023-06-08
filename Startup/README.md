@@ -69,3 +69,9 @@ Forthis delivarable I properly demonstrate an understanding of JavaScript and it
 * my frontend calls third party service endpoints in the contact page
 * my backend provides service endpoints
 * frontend calls service endpoints
+
+## DataBase - Mongo DB
+
+* MongoDB Atlas database created 
+* Provides several backend endpoints for manipulating application data
+* Stores application and user data in MongoDB
