@@ -84,3 +84,9 @@ Forthis delivarable I properly demonstrate an understanding of JavaScript and it
 * stores and retrieves credentials via MongoDB
 * restricts application functinality based upon authentication
 
+## Websocket
+
+* Backend listens for WebSocket connection
+* Frontend makes WebSocket connection
+* Data sent over WebSocket connection // still facing bugs
+* WebSocket support for data pushed from the backend
