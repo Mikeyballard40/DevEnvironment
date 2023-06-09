@@ -75,3 +75,12 @@ Forthis delivarable I properly demonstrate an understanding of JavaScript and it
 * MongoDB Atlas database created 
 * Provides several backend endpoints for manipulating application data
 * Stores application and user data in MongoDB
+
+## Secure Login 
+
+* Supports new user registration
+* Supports existing user authentication
+* Encripts sensitive information
+* stores and retrieves credentials via MongoDB
+* restricts application functinality based upon authentication
+
