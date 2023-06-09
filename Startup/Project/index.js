@@ -1,10 +1,11 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
 const app = express();
 const DBR = require('./data.js');
 const userCounts = {};
-let scores;
-let score;
-let returnScore = {};
+
+const authCookieName = 'token';
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -43,21 +44,39 @@ apiRouter.get('/scores/:userEmail', async (_req, res) => {
     res.send(TorF);
   });
 
-apiRouter.post('/createAccount', async (_req, res) => {
-  const user = _req.body;
-  console.log(user);
-  const TorF = await DBR.locate(user.email);
 
-  // console.log(user);
-  if (TorF.length === 0){
-    // console.log("addScore")
-    // console.log(_req.body);
-    await DBR.addScore(user);
-  }else{
-    throw(console.error("User already exists"));
-  }; 
-  res.send(TorF);
+
+//***************************** authentic user creation and error message ************************************ */
+
+apiRouter.post('/auth/createAcc', async (req, res) => {
+  // console.log(req.body.email); //working
+  const apex = await DBR.locate(req.body.email);
+  console.log(apex);
+  if (apex.length > 0) {
+    console.log("FAILED")
+    res.status(409).send({ msg: 'Existing user' });
+  } else {
+    const user = await DBR.createUser(req.body.name, req.body.email, req.body.password, req.body.score);
+
+    // Set the cookie
+    setAuthCookie(res, user.token);
+
+    res.send({
+      id: user._id,
+    });
+  }
 });
+
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+//***************************** authentic user creation and error message *************************************** */
 
 apiRouter.get('/loadScores', async (_req, res) => {
   const prof = await DBR.lScores();

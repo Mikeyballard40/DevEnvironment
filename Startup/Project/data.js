@@ -1,5 +1,7 @@
 
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
 const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
@@ -17,11 +19,7 @@ const scoreCollection = db.collection('score');
   process.exit(1);
 });
 
-async function addScore(score) {
-  console.log(score);
-  const result = await scoreCollection.insertOne(score);
-  return result;
-}
+
 
 async function updateScore(score) {
   // console.log("updateScore");
@@ -41,13 +39,14 @@ async function updateScore(score) {
 }
 
 
- function locate(uEmail) {
+ async function locate(uEmail) {
     const query = { "email": uEmail };
     // console.log(query); //working correctly
     const options = {};
     const cursor = scoreCollection.find(query, options);
-    const Arr = cursor.toArray();
-    //console.log(Arr); //working correclty
+    const Arr = await cursor.toArray();
+    console.log("Arr");
+    console.log(Arr); //working correclty = []
     return Arr;
   }
 
@@ -59,5 +58,27 @@ async function updateScore(score) {
     return Arr;
   }
 
+//***************************** authentic user creation and error message ************************************ */
 
- module.exports = { addScore, updateScore, locate, lScores, locateEmail };
+async function createUser(name, email, password, score) {
+  // Hash the password before we insert it into the database
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    name: name,
+    email: email,
+    score: score,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await scoreCollection.insertOne(user);
+
+  return user;
+}
+
+//***************************** authentic user creation and error message ************************************ */
+
+
+
+
+ module.exports = { updateScore, locate, lScores, locateEmail, createUser };
