@@ -1,10 +1,8 @@
 async function getPlayerName() {
-    const user = JSON.parse(localStorage.getItem("User"));
-    console.log(user);
-    const userEmail = localStorage.getItem('userEmail') ?? 'Guest';
     const tempUser = await getData();
+    // console.log(tempUser);
 
-    console.log(userEmail);
+    // console.log(userEmail);
 
     // console.log(tempUser[0].name);
     if (tempUser.length == 0){
@@ -28,8 +26,9 @@ async function getPlayerName() {
 
 
   async function getData(){
-        const userEmail = localStorage.getItem('userEmail');
+        const userEmail = localStorage.getItem("User");
         console.log(userEmail);
+
           const check = await fetch(`api/scores/${userEmail}`);
           let scores = await check.json();
           console.log(scores);

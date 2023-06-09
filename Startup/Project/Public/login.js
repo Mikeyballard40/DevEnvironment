@@ -18,7 +18,7 @@ async function userLog(){
   });
   if(response.status === 200){
     console.log("Working");
-    localStorage.setItem("User", JSON.stringify({email: Email}));
+    localStorage.setItem("User", Email);
     window.location.href = "calendar.html";
   }else{
     console.log(Email);
