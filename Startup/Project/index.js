@@ -78,6 +78,25 @@ function setAuthCookie(res, authToken) {
 
 //***************************** authentic user creation and error message *************************************** */
 
+//***************************** Authentic user login ***************************** */
+
+// GetAuth token for the provided credentials
+apiRouter.post('/auth/userLogin', async (req, res) => { //will function if user email and password are correct. will not work if user password is incorrect. 
+  const user = await DBR.locate(req.body.email);
+  if (user.length > 0) {
+    if (await bcrypt.compare(req.body.password, user[0].password)) {
+      setAuthCookie(res, user[0].token);
+      res.send({ id: user[0].id });
+      return;
+    }
+  }
+  res.status(401).send({ msg: 'Unauthorized' });
+});
+// GetAuth token for the provided credentials
+
+//***************************** Authentic user login ***************************** */
+
+
 apiRouter.get('/loadScores', async (_req, res) => {
   const prof = await DBR.lScores();
   // console.log(prof);
@@ -99,71 +118,10 @@ apiRouter.post('/score', async (req, res) => {
 
 })
 
-
-
-
-// apiRouter.post('/score', (req, res) => {
-//   score = req.body;
-//   // console.log("score");
-//   if(score.score > 1){ 
-//     returnScore = DBR.updateScore(score);
-//   } else {
-//     returnScore = DBR.addScore(score);
-//   }
-
-
-// apiRouter.post('/score', async (req, res) => {
-//   const { name, email, password, score } = req.body;
-  
-//   // Check if the user already exists in the database
-//   const existingUser = await scoreCollection.findOne({ name: name });
-//   if (existingUser) {
-//     const updatedScore = existingUser.score + 1;
-//     await scoreCollection.updateOne({ name: name }, { $set: { score: updatedScore } });
-//     res.send({ name: name, score: updatedScore });
-//   } else {
-//     const result = await scoreCollection.insertOne({ name: name, email: email, password: password, score: score });
-//     res.send(result.ops[0]);
-//   }
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // console.log(returnScore);
-// res.send(returnScore);
-// });
-
 apiRouter.get('/username', (_req, res) => {
   // console.log(userCounts);
     res.send(userCounts);
   });
-
-
-
-//I will need 3: 1 for login and 2 for social
-//get and post
-//create a post request to server when someone records a workout. 
-// create a retrieve request from server when displaying table
-
-// { "name" : "someName" }, // find a document with that filter
-//             { $set: { "name" : "newName" } }
-
-
 
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {

@@ -45,9 +45,13 @@ async function updateScore(score) {
     const options = {};
     const cursor = scoreCollection.find(query, options);
     const Arr = await cursor.toArray();
-    console.log("Arr");
-    console.log(Arr); //working correclty = []
+    // console.log("Arr");
+    // console.log(Arr); 
     return Arr;
+  }
+
+  function getUser(email) {
+    return scoreCollection.findOne({ email: email });
   }
 
   function locateEmail(uEmail) {
@@ -81,4 +85,5 @@ async function createUser(name, email, password, score) {
 
 
 
- module.exports = { updateScore, locate, lScores, locateEmail, createUser };
+
+ module.exports = { getUser, updateScore, locate, lScores, locateEmail, createUser };

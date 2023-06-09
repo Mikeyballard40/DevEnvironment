@@ -3,7 +3,6 @@
 //***************************** authentic user creation and error message ************************************ */
 
 async function createAcc(){
-  console.log("Name")
   const Name = document.querySelector("#Name").value
   const Email = document.querySelector("#email").value
   const Password = document.querySelector("#password").value
@@ -16,8 +15,7 @@ async function createAcc(){
   });
   
   if(ftc.ok){
-    localStorage.setItem("User", JSON.stringify({name: Name, email: Email, password: Password, score: 0}));
-    console.log(Name);
+    localStorage.setItem("User", JSON.stringify({email: Email}));
     window.location.href = "index.html";
   }else{
     console.log(Email);
