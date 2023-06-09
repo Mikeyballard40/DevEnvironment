@@ -2,15 +2,25 @@ body {
   display: flex;
   flex-direction: column;
   min-width: 375px;
+  height: 100vh;
 }
 
 header {
   display: flex;
-  flex: 1 80px;
+  flex: 0 0 80px;
   flex-direction: row;
   align-items: center;
   background-color: cadetblue;
 
+}
+
+
+.user {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0.5em;
 }
 
 menu {
@@ -18,14 +28,34 @@ flex: 1;
 display: flex;
 /*  overwrite Bootstrap so the menu does not wrap */
 flex-direction: row !important;
-
 }
 
-.Section{
-flex: 1 calc(40em - 10px);
+.players {
+  align-self: flex-start;
+  padding: 0.5em;
 }
 
-record{
+.player-name {
+  color: rgb(118, 190, 210);
+}
+
+#player-messages {
+  padding-top: 0.25em;
+  opacity: 0.7;
+}
+
+
+
+.Section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+ 
+}
+
+
+.record{
   display: flex;  
   flex: 1;
   flex-direction: column;
@@ -34,35 +64,42 @@ record{
 }
 
 
+nav .navbar-nav{
+  align-items: end;
+  padding-left: 1em;
+}
+
+nav .nav-link {
+  padding: 0 0.5em;
+  align-items: right;
+}
+
+
+
 main {
 display: flex;
 flex: 1;
 font-style:inherit;
-/* flex: 1 calc(10vh - 100px); */
-display: flex;
 flex-direction: column;
-
-
-justify-content: center;
 background-color: azure;
 }
+
+
 
 .day:hover{
   border: solid black;
 }
 
-nav .nav-link {
-  padding: 0 0.5em;
+.week {
+  height: 60px; /* Set the desired height for the calendar weeks */
 }
 
-.user{
-flex: 1;
-width: 100%;
-padding: 0.5em;
+.day {
+  height: 100%; /* Make the days fill the entire height of the week */
 }
 
 footer {
-flex: 1 50px;
+flex: 0 0 50px;
 background-color: darkslategray;
 color:aliceblue;
 }

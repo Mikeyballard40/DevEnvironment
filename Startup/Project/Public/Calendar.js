@@ -22,6 +22,7 @@ async function getPlayerName() {
     }
     
     updatePlayerName();
+    configureWebSocket();
 
 
 
@@ -68,13 +69,10 @@ async function getPlayerName() {
               headers: { 'content-type': 'application/json' },
               body: JSON.stringify({ name: userName, email: userEmail, password: userPassword, score: userScore }),
             });
-          }
-
-          console.log(userScore);
-        
+          }        
           const responseBody = { name: userName, email: userEmail, password: userPassword, score: userScore };
-          console.log(responseBody);
           localStorage.setItem("record", JSON.stringify(responseBody));
+          broadcastEvent(userName);
           window.location.href = "SelfRecord.html";
         }else{
           let user = scores;
@@ -91,9 +89,42 @@ async function getPlayerName() {
           const responseBody = { name: userName, email: userName, password: userPassword, score: userScore };
           console.log(responseBody);
           localStorage.setItem("record", JSON.stringify(responseBody));
+          broadcastEvent(userName);
           window.location.href = "SelfRecord.html";
         }
+
     }
+
+
+  function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    this.socket.onopen = (event) => {
+      const msg = ' successfully logged in'
+      this.displayMsg('You', msg);
+    };
+    this.socket.onclose = (event) => {
+      this.displayMsg('No user');
+    };
+    this.socket.onmessage = async (event) => {
+      const msg = JSON.parse(await event.data.text());
+      this.displayMsg( msg.from );
+    };
+  }
+
+  function displayMsg(user, msg) {
+    const chatText = document.querySelector('#player-messages');
+    chatText.innerHTML =
+      `<div class="event"><span class="record-event">${user}</span> ${msg}</div>` + chatText.innerHTML;
+  }
+
+  function broadcastEvent(user) {
+    const event = {
+      user: user
+    };
+    this.socket.send(JSON.stringify(user));
+  }
+
 
   
   
