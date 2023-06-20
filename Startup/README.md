@@ -90,3 +90,10 @@ Forthis delivarable I properly demonstrate an understanding of JavaScript and it
 * Frontend makes WebSocket connection
 * Data sent over WebSocket connection // still facing bugs
 * WebSocket support for data pushed from the backend
+
+  ## React
+
+* Bundling using Vite
+* Several function al react components across multiple files
+* Use of React router
+* Use of React hooks
