@@ -26,9 +26,10 @@ app.use(`/api`, apiRouter);
 
 // check Username
 apiRouter.get('/scores/:userEmail', async (_req, res) => {
-    // console.log(_req.params.username);
+    console.log("YES IT IS WORKING HERE");
+    console.log(_req.params.username);
     const TorF = await DBR.locate(_req.params.userEmail);
-    // console.log(TorF); // working correctly - returns an array of objects that fit the search
+    console.log(TorF); // working correctly - returns an array of objects that fit the search
     res.send(TorF);
   });
 
@@ -126,9 +127,6 @@ apiRouter.get('/username', (_req, res) => {
   });
 
 // Return the application's default page if the path is unknown
-app.use((_req, res) => {
-    res.sendFile('index.html', { root: 'public' });
-  });
 
 
 const httpService = app.listen(port, () => {

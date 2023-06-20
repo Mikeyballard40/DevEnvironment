@@ -107,15 +107,19 @@ async function getPlayerName() {
       this.displayMsg('No user');
     };
     this.socket.onmessage = async (event) => {
-      const msg = JSON.parse(await event.data.text());
-      this.displayMsg( msg.from );
+    
+      const user = JSON.parse(await event.data.text());
+      const msg = " recorded a workout";
+      console.log(msg);
+      this.displayMsg( user, msg );
     };
   }
 
   function displayMsg(user, msg) {
+   
     const chatText = document.querySelector('#player-messages');
     chatText.innerHTML =
-      `<div class="event"><span class="record-event">${user}</span> ${msg}</div>` + chatText.innerHTML;
+      `<div className="event"><span className="record-event">${user}</span> ${msg}</div>` + chatText.innerHTML;
   }
 
   function broadcastEvent(user) {

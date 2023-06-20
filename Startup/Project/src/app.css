@@ -1,4 +1,4 @@
-body {
+.app {
     display: flex;
     flex-direction: column;
     min-width: 375px;
@@ -31,9 +31,11 @@ main {
     background-color: azure;
   }
 
-nav .nav-link {
-  padding: 0 0.5em;
-}
+ menu .nav-item {
+    padding: 0 0.3em
+ }
+
+
 
 footer {
   flex: 1 50px;
